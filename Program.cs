@@ -99,8 +99,20 @@ namespace IntroToOrms
       var totalanimalsseen = db.SeenAnimals.Sum(seenanimal => seenanimal.CountOfTimesSeen);
 
       Console.WriteLine(totalanimalsseen);
-      //Get the CountOfTimesSeen of lions, tigers and bears
 
+      db.SeenAnimals.Add(new SeenAnimals
+      {
+        Species = "Bears",
+        CountOfTimesSeen = 5,
+        LocationOfLastSeen = "Jungle",
+      });
+
+      db.SaveChanges();
+
+      //Get the CountOfTimesSeen of lions, tigers and bears
+      var totalofeachanimalseen = db.SeenAnimals.Where(seenanimal => seenanimal.Species == "Lions" || seenanimal.Species == "Tigers" || seenanimal.Species == "Bears").Sum(s => s.CountOfTimesSeen);
+
+      Console.WriteLine(totalofeachanimalseen);
     }
   }
 }
