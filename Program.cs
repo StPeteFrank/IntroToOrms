@@ -65,12 +65,41 @@ namespace IntroToOrms
         db.SaveChanges();
       }
 
+      var Lions2 = db.SeenAnimals.FirstOrDefault(seenanimal => seenanimal.Id == 2);
+      if (Lions != null)
+      {
+        Lions2.LocationOfLastSeen = "Jungle";
+        db.SaveChanges();
+      }
+
       var allanimals = db.SeenAnimals;
       foreach (var animals in allanimals)
       {
         Console.WriteLine($"{animals.Id}, {animals.Species}");
       }
       //DELETE Data
+      //Remove all animals that I have seen in the Desert
+      //find the animals
+      var dessertanimals = db.SeenAnimals.FirstOrDefault(seenanimal => seenanimal.LocationOfLastSeen == "Dessert");
+      if (dessertanimals != null)
+      {
+        //delete the animals
+        db.SeenAnimals.Remove(dessertanimals);
+        //save your changes
+        db.SaveChanges();
+      }
+      var allanimals2 = db.SeenAnimals;
+      foreach (var animals in allanimals2)
+      {
+        Console.WriteLine($"{animals.Id}, {animals.Species}, {animals.LocationOfLastSeen}");
+      }
+
+      //Add all the CountOfTimesSeen and get a total number of animals seen
+
+      var totalanimalsseen = db.SeenAnimals.Sum(seenanimal => seenanimal.CountOfTimesSeen);
+
+      Console.WriteLine(totalanimalsseen);
+      //Get the CountOfTimesSeen of lions, tigers and bears
 
     }
   }
