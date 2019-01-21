@@ -83,6 +83,7 @@ namespace IntroToOrms
       var dessertanimals = db.SeenAnimals.FirstOrDefault(seenanimal => seenanimal.LocationOfLastSeen == "Dessert");
       if (dessertanimals != null)
       {
+        s
         //delete the animals
         db.SeenAnimals.Remove(dessertanimals);
         //save your changes
